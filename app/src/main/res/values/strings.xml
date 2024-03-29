@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GitHubUserSDK</string>
+    <string name="no_internet_connection_available">No Internet Connection Available</string>
 </resources>
