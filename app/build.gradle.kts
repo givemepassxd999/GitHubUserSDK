@@ -53,14 +53,14 @@ android {
 dependencies {
 
     ext {
-        set("paging_version", "3.3.0-alpha04")
+        set("paging_version", "3.3.0-alpha05")
         set("kotlin_version", "3.3.0-alpha04")
         set("retrofit_version", "2.9.0")
         set("retrofit_log_version", "4.9.3")
         set("lifecycle_version", "2.7.0")
         set("timber_version", "5.0.1")
         set("glide_version", "4.16.0")
-        set("hilt_version", "2.44")
+        set("hilt_version", "2.49")
     }
 
     // hilt injection
@@ -95,7 +95,8 @@ dependencies {
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
+    //Material Design 3
+    implementation("androidx.compose.material3:material3:1.2.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
