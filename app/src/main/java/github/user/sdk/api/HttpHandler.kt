@@ -9,6 +9,7 @@ class HttpHandler {
     suspend fun <T : Any> getResult(res: suspend () -> Response<T>): HttpResult<T> {
         try {
             val response = res()
+            Timber.d("HttpHandler: getResult: response: $response")
             if (response.isSuccessful) {
                 response.body()?.let { body ->
                     Timber.d("HttpHandler: getResult: body: $body")
