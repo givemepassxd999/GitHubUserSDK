@@ -32,6 +32,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import dagger.hilt.android.AndroidEntryPoint
+import github.user.sdk.R
 import github.user.sdk.theme.GitHubUserSDKTheme
 import github.user.sdk.viewmodel.MainViewModel
 import timber.log.Timber
@@ -62,7 +63,7 @@ class MainActivity : ComponentActivity() {
                             keyboardController?.hide()
                         },
                         placeholder = {
-                            Text(text = "Search github users")
+                            Text(text = getString(R.string.search_github_users))
                         },
                         leadingIcon = {
                             Icon(
@@ -77,7 +78,7 @@ class MainActivity : ComponentActivity() {
                                     Icon(
                                         imageVector = Icons.Default.Close,
                                         tint = MaterialTheme.colorScheme.onSurface,
-                                        contentDescription = "Clear search"
+                                        contentDescription = getString(R.string.clear_search)
                                     )
                                 }
                             }

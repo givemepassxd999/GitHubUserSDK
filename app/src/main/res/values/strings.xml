@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">GitHubUserSDK</string>
     <string name="no_internet_connection_available">No Internet Connection Available</string>
+    <string name="search_github_users">Search github users</string>
+    <string name="clear_search">Clear search</string>
 </resources>

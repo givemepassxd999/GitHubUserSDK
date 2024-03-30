@@ -8,7 +8,6 @@ import github.user.sdk.repo.Repository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,15 +19,23 @@ class MainViewModel @Inject constructor(private val repository: Repository) : Vi
     private val _users = MutableStateFlow(emptyList<UserResponse>())
     val users = _users.asStateFlow()
 
+    private val _originUsers = MutableStateFlow(emptyList<UserResponse>())
+
     fun onSearchQueryChange(query: String) {
         _searchQuery.value = query
+        if (query.isEmpty()) {
+            _users.value = _originUsers.value
+        } else {
+            _users.value = _originUsers.value.filter {
+                it.login?.contains(query, true) == true
+            }
+        }
     }
 
-    // fetch users
     fun fetchUsers() {
         viewModelScope.launch {
             repository.queryUsers().collect {
-                Timber.d("fetchUsers: $it")
+                _originUsers.value = it
                 _users.value = it
             }
         }
