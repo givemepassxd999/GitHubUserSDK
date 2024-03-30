@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -22,16 +23,17 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -92,111 +94,128 @@ class UserDetailFragment : DialogFragment() {
                 .fillMaxSize()
                 .background(color = colorResource(id = R.color.white))
         ) {
-            AsyncImage(
-                modifier = Modifier
-                    .padding(vertical = 10.dp)
-                    .padding(start = 10.dp)
-                    .size(100.dp)
-                    .clip(CircleShape),
-                model = userDetail.avatarUrl ?: "",
-                contentDescription = null,
-            )
-            Text(text = userDetail.login ?: "", fontSize = 20.sp)
-            Text(text = userDetail.bio ?: "", fontSize = 20.sp)
-            HorizontalDivider()
-            Row {
-                Icon(
-                    imageVector = Icons.Default.Person,
-                    contentDescription = null,
-                    modifier = Modifier.size(24.dp),
-                    tint = colorResource(id = R.color.black)
-                )
-                Column {
-                    Column(
-                        modifier = Modifier.padding(10.dp),
-                        verticalArrangement = Arrangement.Center
-                    ) {
-                        Text(
-                            text = user.login ?: "", color = Color.Black
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    AsyncImage(
+                        modifier = Modifier
+                            .padding(vertical = 10.dp)
+                            .padding(start = 10.dp)
+                            .size(100.dp)
+                            .clip(CircleShape),
+                        model = userDetail.avatarUrl ?: "",
+                        contentDescription = null,
+                    )
+                    Text(text = userDetail.login ?: "", fontSize = 20.sp)
+                    Text(text = userDetail.bio ?: "", fontSize = 20.sp)
+                }
+            }
+
+            HorizontalDivider(modifier = Modifier.padding(vertical = 10.dp))
+            Column(modifier = Modifier.padding(start = 10.dp)) {
+                if (userDetail.login?.isNotEmpty() == true) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = Icons.Default.Person,
+                            contentDescription = null,
+                            modifier = Modifier.size(24.dp),
+                            tint = colorResource(id = R.color.black)
                         )
-                        if (user.siteAdmin == true) {
-                            Box(
-                                modifier = Modifier.background(
-                                    color = colorResource(
-                                        id = R.color.color_4953d4
-                                    ), shape = RoundedCornerShape(10.dp)
-                                )
+                        Column {
+                            Column(
+                                modifier = Modifier.padding(10.dp),
+                                verticalArrangement = Arrangement.Center
                             ) {
                                 Text(
-                                    text = getString(R.string.staff),
-                                    fontSize = 12.sp,
-                                    modifier = Modifier.padding(
-                                        vertical = 2.dp, horizontal = 10.dp
-                                    ),
-                                    color = Color.White
+                                    text = user.login ?: "", color = Color.Black
                                 )
-                            }
-                        }
-                    }
-                }
-
-            }
-            Row {
-                Icon(
-                    imageVector = Icons.Default.Place,
-                    contentDescription = null,
-                    modifier = Modifier.size(24.dp),
-                    tint = colorResource(id = R.color.black)
-                )
-                Column {
-                    Column(
-                        modifier = Modifier.padding(10.dp),
-                        verticalArrangement = Arrangement.Center
-                    ) {
-                        Text(
-                            text = userDetail.location ?: "", color = Color.Black
-                        )
-                    }
-                }
-
-            }
-            Row {
-                Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.link),
-                    contentDescription = null,
-                    modifier = Modifier.size(24.dp),
-                    tint = colorResource(id = R.color.black)
-                )
-                Column {
-                    Column(
-                        modifier = Modifier.padding(10.dp),
-                        verticalArrangement = Arrangement.Center
-                    ) {
-                        val annotatedString = buildAnnotatedString {
-                            pushStringAnnotation(
-                                tag = "url",
-                                annotation = userDetail.blog ?: ""
-                            )
-                            withStyle(style = SpanStyle(color = colorResource(id = R.color.purple_700))) {
-                                append(userDetail.blog ?: "")
-                            }
-                        }
-                        ClickableText(
-                            text = annotatedString,
-                            onClick = {
-                                userDetail.blog?.let { url ->
-                                    if (url.isNotEmpty()) {
-                                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                                        startActivity(intent)
+                                if (user.siteAdmin == true) {
+                                    Box(
+                                        modifier = Modifier.background(
+                                            color = colorResource(
+                                                id = R.color.color_4953d4
+                                            ), shape = RoundedCornerShape(10.dp)
+                                        )
+                                    ) {
+                                        Text(
+                                            text = getString(R.string.staff),
+                                            fontSize = 12.sp,
+                                            modifier = Modifier.padding(
+                                                vertical = 2.dp, horizontal = 10.dp
+                                            ),
+                                            color = Color.White
+                                        )
                                     }
                                 }
                             }
-                        )
+                        }
                     }
                 }
+                if (userDetail.location?.isNotEmpty() == true) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = Icons.Default.Place,
+                            contentDescription = null,
+                            modifier = Modifier.size(24.dp),
+                            tint = colorResource(id = R.color.black)
+                        )
+                        Column {
+                            Column(
+                                modifier = Modifier.padding(10.dp),
+                                verticalArrangement = Arrangement.Center
+                            ) {
+                                Text(
+                                    text = userDetail.location ?: "", color = Color.Black
+                                )
+                            }
+                        }
 
+                    }
+                }
+                if (userDetail.blog?.isNotEmpty() == true) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = ImageVector.vectorResource(id = R.drawable.link),
+                            contentDescription = null,
+                            modifier = Modifier.size(24.dp),
+                            tint = colorResource(id = R.color.black)
+                        )
+                        Column {
+                            Column(
+                                modifier = Modifier.padding(10.dp),
+                                verticalArrangement = Arrangement.Center
+                            ) {
+                                val annotatedString = buildAnnotatedString {
+                                    pushStringAnnotation(
+                                        tag = stringResource(R.string.url_tag),
+                                        annotation = userDetail.blog ?: ""
+                                    )
+                                    withStyle(style = SpanStyle(color = colorResource(id = R.color.purple_700))) {
+                                        append(userDetail.blog ?: "")
+                                    }
+                                }
+                                ClickableText(
+                                    text = annotatedString,
+                                    onClick = {
+                                        userDetail.blog?.let { url ->
+                                            if (url.isNotEmpty()) {
+                                                val intent =
+                                                    Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                                                startActivity(intent)
+                                            }
+                                        }
+                                    }
+                                )
+                            }
+                        }
+                    }
+                }
             }
-
         }
     }
 

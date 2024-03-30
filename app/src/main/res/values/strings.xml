@@ -4,4 +4,5 @@
     <string name="search_github_users">Search github users</string>
     <string name="clear_search">Clear search</string>
     <string name="staff">STAFF</string>
+    <string name="url_tag">url</string>
 </resources>
