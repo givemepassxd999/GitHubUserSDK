@@ -14,6 +14,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
@@ -32,6 +33,9 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     color = MaterialTheme.colorScheme.background,
                 ) {
+                    LaunchedEffect(key1 = Unit) {
+                        viewModel.fetchUsers()
+                    }
                     val keyboardController = LocalSoftwareKeyboardController.current
                     val searchQuery = viewModel.searchQuery.collectAsState().value
                     SearchBar(
