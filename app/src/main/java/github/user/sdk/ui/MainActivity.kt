@@ -8,8 +8,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
@@ -23,9 +26,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import dagger.hilt.android.AndroidEntryPoint
 import github.user.sdk.theme.GitHubUserSDKTheme
 import github.user.sdk.viewmodel.MainViewModel
@@ -84,8 +89,19 @@ class MainActivity : ComponentActivity() {
                                 modifier = Modifier.fillMaxSize()
                             ) {
                                 items(users) { user ->
-                                    Row{
-                                        Text(text = user.login ?: "", color = Color.Black)
+                                    Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                                        AsyncImage(
+                                            modifier = Modifier
+                                                .size(50.dp)
+                                                .clip(CircleShape),
+                                            model = user.avatarUrl ?: "",
+                                            contentDescription = null,
+                                        )
+                                        Text(
+                                            modifier = Modifier.padding(10.dp),
+                                            text = user.login ?: "",
+                                            color = Color.Black
+                                        )
                                     }
 
                                 }

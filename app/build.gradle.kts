@@ -63,7 +63,11 @@ dependencies {
         set("timber_version", "5.0.1")
         set("glide_version", "4.16.0")
         set("hilt_version", "2.49")
+        set("coil_version", "2.6.0")
     }
+
+    // coil
+    implementation("io.coil-kt:coil-compose:${ext.get("coil_version")}")
 
     // hilt injection
     implementation("com.google.dagger:hilt-android:${ext.get("hilt_version")}")
