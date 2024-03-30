@@ -19,6 +19,9 @@ class MainViewModel @Inject constructor(private val repository: Repository) : Vi
     private val _users = MutableStateFlow(emptyList<UserResponse>())
     val users = _users.asStateFlow()
 
+    private val _userClick = MutableStateFlow(UserResponse())
+    val userClick = _userClick.asStateFlow()
+
     private val _originUsers = MutableStateFlow(emptyList<UserResponse>())
 
     fun onSearchQueryChange(query: String) {
@@ -39,5 +42,9 @@ class MainViewModel @Inject constructor(private val repository: Repository) : Vi
                 _users.value = it
             }
         }
+    }
+
+    fun onUserClick(user: UserResponse) {
+        _userClick.value = user
     }
 }

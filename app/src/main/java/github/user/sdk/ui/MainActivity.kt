@@ -1,11 +1,12 @@
 package github.user.sdk.ui
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -42,13 +43,14 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import dagger.hilt.android.AndroidEntryPoint
 import github.user.sdk.R
+import github.user.sdk.data.UserResponse
 import github.user.sdk.theme.GitHubUserSDKTheme
+import github.user.sdk.ui.UserDetailFragment.Companion.USER_DETAIL_TAG
 import github.user.sdk.viewmodel.MainViewModel
-import timber.log.Timber
 
 @AndroidEntryPoint
 @OptIn(ExperimentalMaterial3Api::class)
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,12 +65,15 @@ class MainActivity : ComponentActivity() {
                     val keyboardController = LocalSoftwareKeyboardController.current
                     val searchQuery = viewModel.searchQuery.collectAsState().value
                     val users = viewModel.users.collectAsState().value
-                    Timber.d("users: $users")
-                    SearchBar(
-                        query = searchQuery,
+                    val userClick = viewModel.userClick.collectAsState().value
+                    userClick.id?.let {
+                        UserDetailFragment.getInstance(userClick)
+                            .show(supportFragmentManager, USER_DETAIL_TAG)
+                        viewModel.onUserClick(UserResponse())
+                    }
+                    SearchBar(query = searchQuery,
                         onQueryChange = { viewModel.onSearchQueryChange(it) },
                         onSearch = {
-                            //to do search
                             keyboardController?.hide()
                         },
                         placeholder = {
@@ -100,15 +105,16 @@ class MainActivity : ComponentActivity() {
                                     .padding(horizontal = 10.dp)
                             ) {
                                 items(users) { user ->
-                                    Card(
-                                        elevation = CardDefaults.cardElevation(
-                                            defaultElevation = 6.dp
-                                        ),
+                                    Card(elevation = CardDefaults.cardElevation(
+                                        defaultElevation = 6.dp
+                                    ),
                                         border = BorderStroke(1.dp, Color.LightGray),
                                         modifier = Modifier
+                                            .clickable {
+                                                viewModel.onUserClick(user = user)
+                                            }
                                             .fillMaxWidth()
-                                            .padding(vertical = 3.dp)
-                                    ) {
+                                            .padding(vertical = 3.dp)) {
                                         Row(
                                             verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
                                             modifier = Modifier
@@ -131,8 +137,7 @@ class MainActivity : ComponentActivity() {
                                                 verticalArrangement = Arrangement.Center
                                             ) {
                                                 Text(
-                                                    text = user.login ?: "",
-                                                    color = Color.Black
+                                                    text = user.login ?: "", color = Color.Black
                                                 )
                                                 if (user.siteAdmin == true) {
                                                     Box(
@@ -146,8 +151,7 @@ class MainActivity : ComponentActivity() {
                                                             text = getString(R.string.staff),
                                                             fontSize = 12.sp,
                                                             modifier = Modifier.padding(
-                                                                vertical = 2.dp,
-                                                                horizontal = 10.dp
+                                                                vertical = 2.dp, horizontal = 10.dp
                                                             ),
                                                             color = Color.White
                                                         )
