@@ -3,4 +3,5 @@
     <string name="no_internet_connection_available">No Internet Connection Available</string>
     <string name="search_github_users">Search github users</string>
     <string name="clear_search">Clear search</string>
+    <string name="staff">STAFF</string>
 </resources>

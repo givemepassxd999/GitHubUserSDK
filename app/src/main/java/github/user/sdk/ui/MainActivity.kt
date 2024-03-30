@@ -6,6 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,6 +17,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
@@ -32,7 +36,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import dagger.hilt.android.AndroidEntryPoint
 import github.user.sdk.R
@@ -120,11 +126,34 @@ class MainActivity : ComponentActivity() {
                                                 model = user.avatarUrl ?: "",
                                                 contentDescription = null,
                                             )
-                                            Text(
+                                            Column(
                                                 modifier = Modifier.padding(10.dp),
-                                                text = user.login ?: "",
-                                                color = Color.Black
-                                            )
+                                                verticalArrangement = Arrangement.Center
+                                            ) {
+                                                Text(
+                                                    text = user.login ?: "",
+                                                    color = Color.Black
+                                                )
+                                                if (user.siteAdmin == true) {
+                                                    Box(
+                                                        modifier = Modifier.background(
+                                                            color = colorResource(
+                                                                id = R.color.color_4953d4
+                                                            ), shape = RoundedCornerShape(10.dp)
+                                                        )
+                                                    ) {
+                                                        Text(
+                                                            text = getString(R.string.staff),
+                                                            fontSize = 12.sp,
+                                                            modifier = Modifier.padding(
+                                                                vertical = 2.dp,
+                                                                horizontal = 10.dp
+                                                            ),
+                                                            color = Color.White
+                                                        )
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }

@@ -6,4 +6,5 @@ data class UserResponse(
     @SerializedName("login") var login: String? = null,
     @SerializedName("id") val id: Int? = null,
     @SerializedName("avatar_url") val avatarUrl: String? = null,
+    @SerializedName("site_admin") val siteAdmin: Boolean? = null,
 )
