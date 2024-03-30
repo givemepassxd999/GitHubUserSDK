@@ -4,10 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -16,6 +17,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -46,7 +49,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             GitHubUserSDKTheme {
                 Surface(
-                    color = MaterialTheme.colorScheme.background,
+                    color = Color.White,
                 ) {
                     LaunchedEffect(key1 = Unit) {
                         viewModel.fetchUsers()
@@ -85,26 +88,45 @@ class MainActivity : ComponentActivity() {
                         },
                         content = {
                             LazyColumn(
-                                verticalArrangement = Arrangement.spacedBy(32.dp),
-                                contentPadding = PaddingValues(16.dp),
-                                modifier = Modifier.fillMaxSize()
+                                modifier = Modifier
+                                    .background(color = Color.White)
+                                    .fillMaxSize()
+                                    .padding(horizontal = 10.dp)
                             ) {
                                 items(users) { user ->
-                                    Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
-                                        AsyncImage(
+                                    Card(
+                                        elevation = CardDefaults.cardElevation(
+                                            defaultElevation = 6.dp
+                                        ),
+                                        border = BorderStroke(1.dp, Color.LightGray),
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(vertical = 3.dp)
+                                    ) {
+                                        Row(
+                                            verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
                                             modifier = Modifier
-                                                .size(50.dp)
-                                                .clip(CircleShape),
-                                            model = user.avatarUrl ?: "",
-                                            contentDescription = null,
-                                        )
-                                        Text(
-                                            modifier = Modifier.padding(10.dp),
-                                            text = user.login ?: "",
-                                            color = Color.Black
-                                        )
+                                                .background(
+                                                    color = Color.White
+                                                )
+                                                .fillMaxWidth()
+                                        ) {
+                                            AsyncImage(
+                                                modifier = Modifier
+                                                    .padding(vertical = 10.dp)
+                                                    .padding(start = 10.dp)
+                                                    .size(50.dp)
+                                                    .clip(CircleShape),
+                                                model = user.avatarUrl ?: "",
+                                                contentDescription = null,
+                                            )
+                                            Text(
+                                                modifier = Modifier.padding(10.dp),
+                                                text = user.login ?: "",
+                                                color = Color.Black
+                                            )
+                                        }
                                     }
-
                                 }
                             }
                         },
