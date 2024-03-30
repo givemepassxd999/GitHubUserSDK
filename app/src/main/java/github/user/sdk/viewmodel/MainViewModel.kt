@@ -8,6 +8,7 @@ import github.user.sdk.repo.MainRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -37,9 +38,13 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
 
     fun fetchUsers() {
         viewModelScope.launch {
-            repository.queryUsers().collect {
-                _originUsers.value = it
-                _users.value = it
+            try {
+                repository.queryUsers().collect {
+                    _originUsers.value = it
+                    _users.value = it
+                }
+            } catch (e: Exception) {
+                Timber.d("Error: ${e.message}")
             }
         }
     }
