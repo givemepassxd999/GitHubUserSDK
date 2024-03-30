@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class RepositoryImpl @Inject constructor(private val service: ApiService) : Repository {
+class MainRepositoryImpl @Inject constructor(private val service: ApiService) : MainRepository {
 
     private val httpHandler = HttpHandler()
     override suspend fun queryUsers(): Flow<List<UserResponse>> {

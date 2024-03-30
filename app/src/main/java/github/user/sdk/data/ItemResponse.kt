@@ -11,3 +11,14 @@ data class UserResponse(
     @SerializedName("avatar_url") val avatarUrl: String? = null,
     @SerializedName("site_admin") val siteAdmin: Boolean? = null,
 ) : Parcelable
+
+@Parcelize
+data class UserDetailResponse(
+    @SerializedName("avatar_url") val avatarUrl: String? = null,
+    @SerializedName("name") var fullName: String? = null,
+    @SerializedName("bio") val bio: String? = null,
+    @SerializedName("login") var login: String? = null,
+    @SerializedName("site_admin") val siteAdmin: Boolean? = null,
+    @SerializedName("location") val location: String? = null,
+    @SerializedName("blog") val blog: String? = null,
+) : Parcelable

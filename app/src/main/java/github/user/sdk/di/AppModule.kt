@@ -3,19 +3,26 @@ package github.user.sdk.di
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityRetainedComponent
+import dagger.hilt.android.components.ViewModelComponent
 import github.user.sdk.api.ApiManager
 import github.user.sdk.api.ApiService
-import github.user.sdk.repo.Repository
-import github.user.sdk.repo.RepositoryImpl
+import github.user.sdk.repo.MainRepository
+import github.user.sdk.repo.MainRepositoryImpl
+import github.user.sdk.repo.UserDetailRepository
+import github.user.sdk.repo.UserDetailRepositoryImpl
 
 @Module
-@InstallIn(ActivityRetainedComponent::class)
+@InstallIn(ViewModelComponent::class)
 object AppModule {
 
     @Provides
     fun providesApiService(): ApiService = ApiManager.create()
 
     @Provides
-    fun providerRepository(): Repository = RepositoryImpl(ApiManager.create())
+    fun providerMainRepository(service: ApiService): MainRepository =
+        MainRepositoryImpl(service)
+
+    @Provides
+    fun providerUserDetailRepository(service: ApiService): UserDetailRepository =
+        UserDetailRepositoryImpl(service)
 }
