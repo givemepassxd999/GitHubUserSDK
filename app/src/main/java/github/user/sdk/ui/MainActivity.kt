@@ -43,17 +43,17 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import dagger.hilt.android.AndroidEntryPoint
 import github.user.sdk.R
 import github.user.sdk.data.UserResponse
 import github.user.sdk.theme.GitHubUserSDKTheme
 import github.user.sdk.ui.UserDetailFragment.Companion.USER_DETAIL_TAG
 import github.user.sdk.viewmodel.MainViewModel
+import org.koin.android.ext.android.inject
 
-@AndroidEntryPoint
+
 @OptIn(ExperimentalMaterial3Api::class)
 class MainActivity : AppCompatActivity() {
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel by inject<MainViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

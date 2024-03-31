@@ -41,22 +41,20 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.viewModels
 import coil.compose.AsyncImage
-import dagger.hilt.android.AndroidEntryPoint
 import github.user.sdk.R
 import github.user.sdk.data.UserResponse
 import github.user.sdk.databinding.UserDetailFragmentBinding
 import github.user.sdk.extendsion.parcelable
 import github.user.sdk.viewmodel.UserDetailViewModel
+import org.koin.android.ext.android.inject
 import timber.log.Timber
 
-@AndroidEntryPoint
 class UserDetailFragment : DialogFragment() {
 
     private lateinit var user: UserResponse
     private lateinit var binding: UserDetailFragmentBinding
-    private val viewModel: UserDetailViewModel by viewModels()
+    private val viewModel by inject<UserDetailViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NORMAL, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen)

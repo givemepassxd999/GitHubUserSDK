@@ -6,9 +6,8 @@ import github.user.sdk.api.HttpResult
 import github.user.sdk.data.UserDetailResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import javax.inject.Inject
 
-class UserDetailRepositoryImpl @Inject constructor(private val service: ApiService) :
+class UserDetailRepositoryImpl constructor(private val service: ApiService) :
     UserDetailRepository {
 
     private val httpHandler = HttpHandler()
