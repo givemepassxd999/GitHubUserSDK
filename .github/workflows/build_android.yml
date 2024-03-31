@@ -21,7 +21,7 @@ jobs:
       - name: Run Tests
         run: bash ./gradlew test --stacktrace  
   apk:
-    name: Generate APK
+    name: Generate AAR
     needs: test
     runs-on: ubuntu-latest
     steps:
@@ -31,13 +31,13 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 17
-      - name: Build APK
+      - name: Build AAR
         run: bash ./gradlew assembleDebug --stacktrace
-      - name: Upload APK
+      - name: Upload AAR
         uses: actions/upload-artifact@v1
         with:
-          name: apk
-          path: app/build/outputs/apk/debug/app-debug.apk 
+          name: aar
+          path: app/build/outputs/aar/debug/app-debug.aar
   release:
     name: Release APK
     needs: apk
