@@ -88,7 +88,7 @@ class UserDetailFragment : DialogFragment() {
         LaunchedEffect(key1 = Unit) {
             viewModel.fetchUserDetail(user.login ?: "")
         }
-        val userDetail = viewModel.users.collectAsState().value
+        val userDetail = viewModel.user.collectAsState().value
         Column(
             modifier = Modifier
                 .fillMaxSize()

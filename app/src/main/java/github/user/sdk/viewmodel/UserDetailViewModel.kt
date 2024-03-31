@@ -15,7 +15,7 @@ class UserDetailViewModel @Inject constructor(private val userDetailRepository: 
     ViewModel() {
 
     private val _userDetail = MutableStateFlow(UserDetailResponse())
-    val users = _userDetail.asStateFlow()
+    val user = _userDetail.asStateFlow()
 
     fun fetchUserDetail(userName: String) {
         viewModelScope.launch {

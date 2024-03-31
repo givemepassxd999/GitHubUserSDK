@@ -9,7 +9,7 @@ import java.io.File
  * Created by AhmedEltaher
  */
 
-class TestModelsGenerator {
+class TestUserListGenerator {
 
     private var users = arrayListOf(UserResponse())
 

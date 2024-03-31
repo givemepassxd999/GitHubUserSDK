@@ -3,7 +3,7 @@ package github.user.sdk.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.util.InstantExecutorExtension
 import com.util.MainCoroutineRule
-import com.util.TestModelsGenerator
+import com.util.TestUserListGenerator
 import github.user.sdk.repo.MainRepository
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -27,11 +27,11 @@ class MainViewModelTest {
 
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
-    private val testModelsGenerator: TestModelsGenerator = TestModelsGenerator()
+    private val testUserListGenerator: TestUserListGenerator = TestUserListGenerator()
 
     @Test
     fun fetchUserTest() {
-        val mockUsers = testModelsGenerator.generateUsers()
+        val mockUsers = testUserListGenerator.generateUsers()
         coEvery { mainRepository.queryUsers() } returns flow {
             emit(mockUsers)
         }
@@ -43,7 +43,7 @@ class MainViewModelTest {
 
     @Test
     fun onSearchQueryChangeTest() {
-        val mockUsers = testModelsGenerator.generateUsers()
+        val mockUsers = testUserListGenerator.generateUsers()
         coEvery { mainRepository.queryUsers() } returns flow {
             emit(mockUsers)
         }
@@ -66,7 +66,7 @@ class MainViewModelTest {
 
     @Test
     fun onUserClickTest() {
-        val mockUser = testModelsGenerator.generateAUser()
+        val mockUser = testUserListGenerator.generateAUser()
         mainViewModel = MainViewModel(mainRepository)
         mainViewModel.onUserClick(mockUser)
         Assert.assertEquals(mockUser, mainViewModel.userClick.value)
