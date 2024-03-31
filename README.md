@@ -6,6 +6,7 @@ searching by username, and obtaining detailed user profiles.
 ## Installation
 step 1: Add the app-debug.aar to your project's libs folder.
 step 2: Add the following to your build.gradle file:
+
 ```
 dependencies {
     implementation(files("libs/app-debug.aar"))
@@ -13,6 +14,7 @@ dependencies {
 ```
 step 3: modify the build.gradle file to include the following:
 compileSdk = 34 and targetSdk = 34
+
 ```
 android {
     namespace = "github.user.aardemo"
@@ -28,6 +30,7 @@ android {
 ```
 
 step 4: Add the following to your settings.gradle file:
+
 ``` 
 dependencies {
     ext {
@@ -58,8 +61,9 @@ dependencies {
     
     //...
 }
-
+```
 step 5: Add the following to your AndroidManifest.xml file:
+
 ```
 <application
         android:name="github.user.sdk.ui.MainApplication"
@@ -94,3 +98,4 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
+```
