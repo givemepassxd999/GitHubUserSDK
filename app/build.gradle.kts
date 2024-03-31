@@ -2,9 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
-    id("com.google.dagger.hilt.android")
     id("kotlin-parcelize")
-    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -64,7 +62,7 @@ dependencies {
         set("lifecycle_version", "2.7.0")
         set("timber_version", "5.0.1")
         set("glide_version", "4.16.0")
-        set("hilt_version", "2.49")
+        set("koin_version", "3.1.6")
         set("coil_version", "2.6.0")
         set("junit_version", "5.10.2")
         set("mock_version", "1.13.3")
@@ -76,12 +74,12 @@ dependencies {
     // coil
     implementation("io.coil-kt:coil-compose:${ext.get("coil_version")}")
 
-    // hilt injection
-    implementation("com.google.dagger:hilt-android:${ext.get("hilt_version")}")
-    ksp("com.google.dagger:hilt-android-compiler:2.49")
-
-    // Glide
-    implementation("com.github.bumptech.glide:glide:${ext.get("glide_version")}")
+    // Koin Core features
+    implementation("io.insert-koin:koin-core:${ext.get("koin_version")}")
+    // Koin main features for Android
+    implementation("io.insert-koin:koin-android:${ext.get("koin_version")}")
+    // Java Compatibility
+    implementation("io.insert-koin:koin-android-compat:${ext.get("koin_version")}")
 
     // Timber
     implementation("com.jakewharton.timber:timber:${ext.get("timber_version")}")
@@ -96,9 +94,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:${ext.get("lifecycle_version")}")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${ext.get("lifecycle_version")}")
 
-    // paging
-    implementation("androidx.paging:paging-runtime-ktx:${ext.get("paging_version")}")
-
     // architecture components
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
@@ -109,8 +104,6 @@ dependencies {
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.activity:activity-ktx:1.8.2")
-    implementation("androidx.fragment:fragment-ktx:1.6.2")
 
     //Material Design 3
     implementation("androidx.compose.material3:material3:1.2.1")
