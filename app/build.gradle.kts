@@ -66,6 +66,11 @@ dependencies {
         set("glide_version", "4.16.0")
         set("hilt_version", "2.49")
         set("coil_version", "2.6.0")
+        set("junit_version", "5.10.2")
+        set("mock_version", "1.13.3")
+        set("core_testing_version", "2.2.0")
+        set("assertj_version", "3.19.0")
+        set("coroutines_test_version", "1.6.0")
     }
 
     // coil
@@ -110,11 +115,17 @@ dependencies {
     //Material Design 3
     implementation("androidx.compose.material3:material3:1.2.1")
     implementation("com.google.android.material:material:1.11.0")
-    testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    // Unit Tests
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:${ext.get("junit_version")}")
+    testImplementation("io.mockk:mockk:${ext.get("mock_version")}")
+    androidTestImplementation("org.assertj:assertj-core:${ext.get("assertj_version")}")
+    implementation("androidx.arch.core:core-testing:${ext.get("core_testing_version")}")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${ext.get("coroutines_test_version")}")
 }
