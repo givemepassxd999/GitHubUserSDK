@@ -6,4 +6,7 @@
     <string name="staff">STAFF</string>
     <string name="url_tag">url</string>
     <string name="no_users_found">no users found</string>
+    //for testing
+    <string name="user_item">user item</string>
+    <string name="search_input">search input</string>
 </resources>

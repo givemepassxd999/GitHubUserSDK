@@ -16,7 +16,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -38,6 +38,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -72,13 +73,17 @@ class MainActivity : AppCompatActivity() {
                         viewModel.onUserClick(UserResponse())
                     }
                     SearchBar(
+                        modifier = Modifier.testTag(getString(R.string.search_input)),
                         query = searchQuery,
                         onQueryChange = { viewModel.onSearchQueryChange(it) },
                         onSearch = {
                             keyboardController?.hide()
                         },
                         placeholder = {
-                            Text(text = getString(R.string.search_github_users))
+                            Text(
+                                modifier = Modifier.testTag(getString(R.string.search_github_users)),
+                                text = getString(R.string.search_github_users)
+                            )
                         },
                         leadingIcon = {
                             Icon(
@@ -119,6 +124,7 @@ class MainActivity : AppCompatActivity() {
                 contentAlignment = androidx.compose.ui.Alignment.Center
             ) {
                 Text(
+                    modifier = Modifier.testTag(getString(R.string.no_users_found)),
                     text = getString(R.string.no_users_found),
                     color = Color.Black
                 )
@@ -130,7 +136,7 @@ class MainActivity : AppCompatActivity() {
                     .fillMaxSize()
                     .padding(horizontal = 10.dp)
             ) {
-                items(users) { user ->
+                itemsIndexed(users) { index, user ->
                     Card(elevation = CardDefaults.cardElevation(
                         defaultElevation = 6.dp
                     ),
@@ -139,6 +145,7 @@ class MainActivity : AppCompatActivity() {
                             .clickable {
                                 viewModel.onUserClick(user = user)
                             }
+                            .testTag(getString(R.string.user_item) + index)
                             .fillMaxWidth()
                             .padding(vertical = 3.dp)) {
                         UserListItem(user = user)
