@@ -20,7 +20,7 @@ jobs:
           java-version: 17
       - name: Run Tests
         run: bash ./gradlew test --stacktrace  
-  apk:
+  aar:
     name: Generate AAR
     needs: test
     runs-on: ubuntu-latest
@@ -36,18 +36,18 @@ jobs:
       - name: Upload AAR
         uses: actions/upload-artifact@v1
         with:
-          name: apk
+          name: aar
           path: app/build/outputs/aar/app-debug.aar
   release:
-    name: Release APK
-    needs: apk
+    name: Release AAR
+    needs: aar
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     steps:
-      - name: Download APK from build
+      - name: Download AAR from build
         uses: actions/download-artifact@v1
         with:
-          name: apk  
+          name: aar  
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -56,13 +56,13 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }} 
-      - name: Upload Release APK
+      - name: Upload Release AAR
         id: upload_release_asset
         uses: actions/upload-release-asset@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: apk/app-debug.apk
-          asset_name: MensaApp.apk
+          asset_path: aar/app-debug.aar
+          asset_name: MensaApp.aar
           asset_content_type: application/zip
