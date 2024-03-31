@@ -4,16 +4,18 @@ searching by username, and obtaining detailed user profiles.
 
 
 ## Installation
-step 1: Add the app-debug.aar to your project's libs folder.
-step 2: Add the following to your build.gradle file:
+
+### step 1: Add the app-debug.aar to your project's libs folder.
+
+### step 2: Add the following to your build.gradle file:
 
 ```
 dependencies {
     implementation(files("libs/app-debug.aar"))
 }
 ```
-step 3: modify the build.gradle file to include the following:
-compileSdk = 34 and targetSdk = 34
+### step 3: modify the build.gradle file to include the following:
+* compileSdk = 34 and targetSdk = 34
 
 ```
 android {
@@ -29,7 +31,7 @@ android {
 }
 ```
 
-step 4: Add the following to your settings.gradle file:
+### step 4: Add the following to your settings.gradle file:
 
 ``` 
 dependencies {
@@ -62,7 +64,7 @@ dependencies {
     //...
 }
 ```
-step 5: Add the following to your AndroidManifest.xml file:
+### step 5: Add the following to your AndroidManifest.xml file:
 
 ```
 <application
