@@ -5,13 +5,13 @@ searching by username, and obtaining detailed user profiles.
 
 ## Installation
 
-### step 1: Add the app-debug.aar to your project's libs folder.
+### step 1: Add the github-users-sdk.aar to your project's libs folder.
 
 ### step 2: Add the following to your build.gradle file:
 
 ```
 dependencies {
-    implementation(files("libs/app-debug.aar"))
+    implementation(files("libs/github-users-sdk.aar"))
 }
 ```
 ### step 3: modify the build.gradle file to include the following:
