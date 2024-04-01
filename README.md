@@ -7,11 +7,11 @@ Picture of the SDK in action:
 
 ![](https://github.com/givemepassxd999/GitHubUserSDK/blob/release/demo.gif?raw=true)
 
-![](https://github.com/givemepassxd999/GitHubUserSDK/blob/release/picture01.png?raw=true)
-
-![](https://github.com/givemepassxd999/GitHubUserSDK/blob/release/picture02.png?raw=true)
-
-![](https://github.com/givemepassxd999/GitHubUserSDK/blob/release/picture03.png?raw=true)
+<div>
+<img  src="https://github.com/givemepassxd999/GitHubUserSDK/blob/release/picture01.png?raw=true"  width="200"  />
+<img  src="https://github.com/givemepassxd999/GitHubUserSDK/blob/release/picture02.png?raw=true"  width="200"  />
+<img  src="https://github.com/givemepassxd999/GitHubUserSDK/blob/release/picture03.png?raw=true"  width="200"  />
+</div>
 
 
 # Installation
