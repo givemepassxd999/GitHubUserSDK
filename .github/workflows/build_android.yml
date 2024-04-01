@@ -20,8 +20,8 @@ jobs:
   #         java-version: 17
   #     - name: Run Tests
   #       run: bash ./gradlew test --stacktrace  
-  aar:
-    name: Generate AAR
+  build:
+    name: Generate And Upload AAR
     # needs: test
     runs-on: ubuntu-latest
     steps:
@@ -33,11 +33,13 @@ jobs:
           java-version: 17
       - name: Build AAR
         run: bash ./gradlew assembleDebug --stacktrace
-      - name: Upload AAR
-        uses: actions/upload-artifact@v1
-        with:
-          name: aar
-          path: app/build/outputs/aar/github_user_sdk.aar
+            ls -al 
+            pwd
+      # - name: Upload AAR
+      #   uses: actions/upload-artifact@v1
+      #   with:
+      #     name: aar
+      #     path: app/build/outputs/aar/github_user_sdk.aar
   # release:
   #   name: Release AAR
   #   needs: aar
