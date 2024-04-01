@@ -51,7 +51,7 @@ android {
     afterEvaluate{
         publishing{
             publications {
-                register<MavenPublication>("release") {
+                register<MavenPublication>("defaultAar") {
                     groupId = "com.github.givemepassxd999"
                     artifactId = "GitHubUserSDK"
                     version = "1.0.0"
