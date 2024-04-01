@@ -6,9 +6,26 @@ plugins {
     id("maven-publish")
 }
 
+afterEvaluate{
+    publishing{
+        publications {
+            register<MavenPublication>("release") {
+                groupId = "com.github.givemepassxd999"
+                artifactId = "GitHubUserSDK"
+                version = "1.0.0"
+
+                afterEvaluate {
+                    from(components["release"])
+                }
+            }
+        }
+    }
+}
+
 android {
     namespace = "github.user.sdk"
     compileSdk = 34
+
 
     defaultConfig {
         minSdk = 26
@@ -46,21 +63,6 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-    afterEvaluate{
-        publishing{
-            publications {
-                register<MavenPublication>("defaultAar") {
-                    groupId = "com.github.givemepassxd999"
-                    artifactId = "GitHubUserSDK"
-                    version = "1.0.0"
-
-                    afterEvaluate {
-                        from(components["release"])
-                    }
-                }
-            }
         }
     }
 }
