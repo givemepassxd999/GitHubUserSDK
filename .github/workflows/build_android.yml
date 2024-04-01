@@ -37,7 +37,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: aar
-          path: app/build/outputs/aar/github-user-sdk.aar
+          path: app/build/outputs/aar/app-debug.aar
   # release:
   #   name: Release AAR
   #   needs: aar
