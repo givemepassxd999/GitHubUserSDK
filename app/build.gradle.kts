@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
     id("kotlin-parcelize")
+    id("maven-publish")
 }
 
 android {
@@ -45,6 +46,18 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+    afterEvaluate{
+        publishing{
+            publications {
+                create<MavenPublication>("release") {
+                    from(components["release"])
+                    groupId = "com.github.givemepassxd999"
+                    artifactId = "GitHubUserSDK"
+                    version = "1.0.0"
+                }
+            }
         }
     }
 }
