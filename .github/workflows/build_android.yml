@@ -3,26 +3,26 @@ name: Minimal Android CI Workflow
 on:
   push:
     branches:
-      - main
+      - release
     tags:
       - 'v*'
 
 jobs:
-  # test:
-  #   name: Run Unit Tests
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v1
-  #     - name: Setup JDK
-  #       uses: actions/setup-java@v1
-  #       with:
-  #         java-version: 17
-  #     - name: Run Tests
-  #       run: bash ./gradlew test --stacktrace  
+  test: 
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+      - name: Run Tests
+        run: bash ./gradlew test --stacktrace  
   build:
     name: Generate And Upload AAR
-    # needs: test
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -40,30 +40,6 @@ jobs:
         with:
           name: aar
           path: app/build/outputs/aar/github-users-sdk.aar
-  # release:
-  #   name: Release AAR
-  #   needs: build
-  #   if: startsWith(github.ref, 'refs/tags/v')
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Download AAR from build
-  #       uses: actions/download-artifact@v1
-  #       with:
-  #         name: aar  
-      # - name: Create Release
-      #   id: create_release
-      #   uses: actions/create-release@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }} 
-      #   with:
-      #     tag_name: ${{ github.ref }}
-      #     release_name: Release ${{ github.ref }} 
-      # - name: Upload Release AAR
-      #   id: upload_release_asset
-      #   uses: actions/upload-release-asset@v1.0.1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
-      #   with:
       #     upload_url: ${{ steps.create_release.outputs.upload_url }}
       #     asset_path: aar/app-debug.aar
       #     asset_name: MensaApp.aar
