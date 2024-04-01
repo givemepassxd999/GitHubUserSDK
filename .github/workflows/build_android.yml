@@ -1,0 +1,46 @@
+name: Minimal Android CI Workflow
+
+on:
+  push:
+    branches:
+      - release
+    tags:
+      - 'v*'
+
+jobs:
+  test: 
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+      - name: Run Tests
+        run: bash ./gradlew test --stacktrace  
+  build:
+    name: Generate And Upload AAR
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+      - name: Build AAR
+        run: bash ./gradlew assembleDebug --stacktrace
+      - name: Rename aar
+        run: mv app/build/outputs/aar/app-debug.aar app/build/outputs/aar/github-users-sdk.aar
+      - name: Upload AAR
+        uses: actions/upload-artifact@v1
+        with:
+          name: aar
+          path: app/build/outputs/aar/github-users-sdk.aar
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #     asset_path: aar/app-debug.aar
+      #     asset_name: MensaApp.aar
+      #     asset_content_type: application/zip
