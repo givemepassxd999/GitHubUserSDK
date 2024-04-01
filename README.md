@@ -2,16 +2,28 @@
 This SDK will encapsulate all logic related to GitHub users, such as fetching lists, 
 searching by username, and obtaining detailed user profiles.
 
+# Demo
+The following video demonstrates the SDK in action:
+
+```HTML
+<video width:60% height:auto controls>
+<source src="https://github.com/givemepassxd999/GitHubUserSDK/blob/release/demo.mp4" type="video/mp4">
+</video>
+```
+
+Picture of the SDK in action:
+![demo_pic1]("https://github.com/givemepassxd999/GitHubUserSDK/blob/release/picture01.png")
+![demo_pic2]("https://github.com/givemepassxd999/GitHubUserSDK/blob/release/picture02.png")
+![demo_pic3]("https://github.com/givemepassxd999/GitHubUserSDK/blob/release/picture03.png")
 
 ## Installation
 
-### step 1: Add the app-debug.aar to your project's libs folder.
-
+### step 1: Add the github-users-sdk.aar to your project's libs folder.
 ### step 2: Add the following to your build.gradle file:
 
 ```
 dependencies {
-    implementation(files("libs/app-debug.aar"))
+    implementation(files("libs/github-users-sdk.aar"))
 }
 ```
 ### step 3: modify the build.gradle file to include the following:
