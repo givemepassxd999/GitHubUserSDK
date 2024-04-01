@@ -41,20 +41,21 @@ jobs:
   release:
     name: Release AAR
     needs: build
+    # if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     steps:
       - name: Download AAR from build
         uses: actions/download-artifact@v1
         with:
           name: aar  
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }} 
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }} 
+      # - name: Create Release
+      #   id: create_release
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }} 
+      #   with:
+      #     tag_name: ${{ github.ref }}
+      #     release_name: Release ${{ github.ref }} 
       - name: Upload Release AAR
         id: upload_release_asset
         uses: actions/upload-release-asset@v1.0.1
