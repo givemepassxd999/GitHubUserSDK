@@ -51,11 +51,14 @@ android {
     afterEvaluate{
         publishing{
             publications {
-                create<MavenPublication>("release") {
-                    from(components["release"])
+                register<MavenPublication>("release") {
                     groupId = "com.github.givemepassxd999"
                     artifactId = "GitHubUserSDK"
                     version = "1.0.0"
+
+                    afterEvaluate {
+                        from(components["release"])
+                    }
                 }
             }
         }
